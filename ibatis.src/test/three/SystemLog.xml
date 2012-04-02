@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="SystemLog">
+	<select id="querySysLogList" parameterType="test.SystemLogQueryPara" resultType="test.SystemLog">
+		select * from AMS_SYSTEM_LOG
+		<where>
+			<if test="userID != null">
+	        	t.UserID like '%#{userID}%'
+        	</if>
+			<if test="beginTime != null">
+	        	t.OperTime >= #{beginTime}
+        	</if>
+        	<if test="endTime != null">
+	        	<![CDATA[t.OperTime <= #{endTime}]]>
+        	</if>
+		</where>
+		order by id
+	</select>
+</mapper>

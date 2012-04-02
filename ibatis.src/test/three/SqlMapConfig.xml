@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+<configuration>
+    <plugins>  
+        <!-- 指定数据库分页方言Dialect, 其它方言:OracleDialect,SQLServerDialect,SybaseDialect,DB2Dialect,PostgreSQLDialect,MySQLDialect,DerbyDialect-->  
+        <plugin interceptor="test.three.OffsetLimitInterceptor">  
+            <property name="dialectClass" value="test.three.dialect.OracleDialect"/>  
+        </plugin>  
+    </plugins>  
+    
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@192.168.16.236:1521:orcl"/>
+				<property name="username" value="esa"/>
+				<property name="password" value="ee"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="test/three/SystemLog.xml"/>
+		<mapper resource="test/three/book.xml"/>
+	</mappers>
+</configuration>

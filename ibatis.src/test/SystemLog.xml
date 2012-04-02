@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SystemLog ">
+  <typeAlias alias="SystemLog" type="test.SystemLog"/>
+  <typeAlias alias="SystemLogPara" type="test.SystemLogQueryPara"/>
+  
+  <resultMap id="SystemLogResult" class="SystemLog">
+    <result property="id" column="rn"/>
+    <result property="userID" column="UserID"/>
+    <result property="userName" column="UserName"/>
+    <result property="operTime" column="OperTime"/>
+    <result property="theModule" column="TheModule"/>
+    <result property="operObjectName" column="OperObjectName"/>
+    <result property="operation" column="Operation"/>
+    <result property="operResult" column="OperResult"/>
+    <result property="userIP" column="UserIP"/>
+    <result property="detailInfo" column="DetailInfo"/>
+    <result property="operDevIp" column="OperDevIp"/>
+  </resultMap>
+
+  <select id="querySysLogList" parameterClass="SystemLogPara" resultMap="SystemLogResult" >
+     select  * from (
+            SELECT 
+          r.*,rownum rn from ( select * from AMS_SYSTEM_LOG t
+           <dynamic prepend="where">
+                 <isNotNull prepend="AND" property="userID">
+                      t.UserID like '%$userID$%'
+                 </isNotNull>
+                <isNotNull prepend="AND" property="userName">
+                      t.UserName like '%$userName$%'
+                 </isNotNull>
+                 <isNotNull prepend="AND" property="operObjectName">
+                      t.OperObjectName like '%$operObjectName$%'
+                 </isNotNull>
+                  <isNotNull prepend="AND" property="theModule">
+                      t.TheModule like '%$theModule$%'
+                 </isNotNull>
+                  <isNotNull prepend="AND" property="userIP">
+                      t.UserIP like '%$userIP$%'
+                 </isNotNull>
+                 <isNotNull prepend="AND" property="operResult">
+                    OperResult like '%$operResult$%'
+                 </isNotNull>
+                 <isNotNull prepend="AND" property="beginTime">
+                     t.OperTime >= #beginTime#
+                 </isNotNull>
+                  <isNotNull prepend="AND" property="endTime">
+                     <![CDATA[
+                     t.OperTime <= #endTime#
+                      ]]>
+                 </isNotNull>
+                 <isNotNull prepend="AND" property="userGroupList">
+                    <iterate property="userGroupList" open="(" close=")" conjunction="OR">
+			           t.userGroupKey like '%-$userGroupList[]$%'
+		            </iterate>
+                 </isNotNull>
+             </dynamic>
+             order by t.OperTime desc
+             ) r <![CDATA[where rownum <= #endRowNum#]]>
+      <![CDATA[      
+        ) s  where s.rn >=#startRowNum# 
+      ]]>
+            
+  </select>
+  
+  <select id="SystemLogNum" parameterClass="SystemLogPara" resultClass="String">
+     select count(0) from AMS_SYSTEM_LOG t
+           <dynamic prepend="where">
+                 <isNotNull prepend="AND" property="userID">
+                      t.UserID like '%$userID$%'
+                 </isNotNull>
+                <isNotNull prepend="AND" property="userName">
+                      t.UserName like '%$userName$%'
+                 </isNotNull>
+                 <isNotNull prepend="AND" property="operObjectName">
+                      t.OperObjectName like '%$operObjectName$%'
+                 </isNotNull>
+                  <isNotNull prepend="AND" property="theModule">
+                      t.TheModule like '%$theModule$%'
+                 </isNotNull>
+                  <isNotNull prepend="AND" property="userIP">
+                      t.UserIP like '%$userIP$%'
+                 </isNotNull>
+                 <isNotNull prepend="AND" property="operResult">
+                    OperResult like '%$operResult$%'
+                 </isNotNull>
+                 <isNotNull prepend="AND" property="beginTime">
+                     t.OperTime >= #beginTime#
+                 </isNotNull>
+                  <isNotNull prepend="AND" property="endTime">
+                     <![CDATA[
+                     t.OperTime <= #endTime#
+                      ]]>
+                 </isNotNull>
+                  <isNotNull prepend="AND" property="userGroupList">
+                    <iterate property="userGroupList" open="(" close=")" conjunction="OR">
+			            t.userGroupKey like '%-$userGroupList[]$%'
+		            </iterate>
+                 </isNotNull>
+             </dynamic>
+  </select>
+
+</sqlMap>

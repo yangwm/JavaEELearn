@@ -1,0 +1,37 @@
+This directory contains sample JNDI programs translated from the
+Netscape LDAP SDK.  It demonstrates for the LDAP programmer the
+equivalent way of doing things in JNDI.
+
+It also contains some sample programs that use controls.
+
+These programs all use the LDAP provider by default. The LDAP
+provider conforms to LDAP Version 2 (RFC-1777) and to Version 3
+(RFC-2251). It supports simple authentication using cleartext
+passwords as well as the CRAM-MD5 and EXTERNAL SASL mechanisms.
+See LDAP.txt in the doc/providers directory for more details. 
+
+To set up these examples so that they work in your environment,
+you need to modify some fields in the Env.java file.  For example,
+you probably need to change Env.MY_SERVICE to point to your LDAP
+server and port number, the manager's DN and password (Env.MGR_DN
+and Env.MGR_PW), and so on.
+
+After you have made these changes, compile the .java files to
+generate corresponding .class files. Use JDK 1.1.2 or above.
+
+To run these examples, make sure that your class path includes the
+JNDI classes, the classes for the LDAP provider, and the classes of
+these examples.
+
+# java Getattrs
+# java Compare
+# java Rdentry
+# java Search
+# java RefSearch
+# java RetryRefSearch
+# java Modattrs
+# java Modrdn
+
+# java SortedList <attrID>
+# java SortedView <sortBy> <percentageMark> <sizeOfView>
+# java PagedSearch <sizeOfPage>

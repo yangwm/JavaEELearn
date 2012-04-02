@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Book">
+	<select id="selectBookList" parameterType="dbutilsi.Book" resultType="dbutilsi.Book">
+		select id, title, authors from book 
+		<where>
+			<if test="id != null">
+	        	id > #{id}
+        	</if>
+		</where>
+		order by id
+	</select>
+</mapper>

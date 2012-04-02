@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map_ldaps>
+	<!-- cnName="uid" baseDn="dc=cmcc" expDn="ou=users,dc=${$province$$}"  -->
+    <map_ldap clsName="dppexample.User"
+        cnName="uid" baseDn="ou=users,dc=nj,dc=cmcc" 
+        objectClassName="objectclass" 
+        objectClassValue="top;person;organizationalPerson;inetorgperson;cmcc-abstractperson">
+        
+        <!-- 继承父类User -->
+        <property name="cn" proName="id" level="1"/>
+        <property name="description" proName="description" level="1" />
+        
+        <!-- 2009_08_26
+	        <property name="createDate" proName="createDate" level="1" />
+	        <property name="createUserKey" proName="createUserKey" level="1"/>
+        -->
+        
+        <property name="uid" proName="uid" level="1"/>
+        <property name="userPassword" proName="userPassword" level="1" />
+        <property name="sn" proName="sn" level="1"/>
+        <property name="email" proName="email" level="1" />
+        <property name="gender" proName="gender" level="1" />
+        <property name="birthday" proName="birthday" level="1" />
+        <property name="telephoneNumber" proName="telephoneNumber" level="1" />
+        <property name="mobile" proName="mobile" level="1" />
+        <property name="startTime" proName="startTime" level="1" />
+        <property name="endTime" proName="endTime" level="1" />
+        <property name="status" proName="status" proType="Integer" level="1" />
+        <property name="passwordModifiedDate" proName="passwordModifiedDate" level="1" />
+        <property name="photo" proName="photo" level="1" />
+        <property name="memberOf" proName="memberOf" proType="Set" level="1" />		
+    </map_ldap>
+</map_ldaps>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ldap>
+	<config>
+	  <isAutoSwith>false</isAutoSwith>
+	  <cycleTime>60</cycleTime>
+	  <swithTime>500</swithTime>
+	  <restartTime>10</restartTime>
+	  <hasbakserver>false</hasbakserver>
+	  
+	  <!-- 认证时使用 -->
+	  <userClass>com.ultrapower.caspcontrol.bl.data.object.user.User</userClass>
+	  <daoClass>com.ultrapower.dpp.dao.ldap.LDAPBaseDaoImpl</daoClass>
+	  
+	  <!-- 判断连接是否可用时使用 -->
+	  <testSql>dc=cmcc</testSql>
+	  
+	  <LDAPMasterServer>
+	    <Factory>com.sun.jndi.ldap.LdapCtxFactory</Factory>
+	    <Url>ldap://10.1.101.124:25000/</Url>
+	    <AdminName>cn=Directory Manager</AdminName>
+	    <AdminPassword>Ldap1234</AdminPassword>
+	    <PoolSize>10</PoolSize>
+	    <timeout>1000</timeout>
+	    <DBConn>com.ultrapower.dpp.connection.ldap.impl.LdapConnectionImpl</DBConn>
+	  </LDAPMasterServer>
+	  
+	  <LDAPBakServer>
+	    <Factory>com.sun.jndi.ldap.LdapCtxFactory</Factory>
+	    <Url></Url>
+	    <AdminName></AdminName>
+	    <AdminPassword></AdminPassword>
+	    <PoolSize>10</PoolSize>
+	    <timeout>1000</timeout>
+	    <DBConn>com.ultrapower.dpp.connection.ldap.impl.LdapConnectionImpl</DBConn>
+	  </LDAPBakServer>
+	</config>
+</ldap>
