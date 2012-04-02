@@ -1,0 +1,27 @@
+<?xml version="1.0"  encoding="ISO-8859-1"?> 
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure 1.2//EN" "http://jetty.mortbay.org/configure_1_2.dtd">
+
+<Configure id="simpleXmlConfigure" class="jetty.xml.SimpleXmlConfigure">
+	<Call name="doAdd"></Call>
+
+	<Set name="port">8080</Set>
+
+	<Get id="p" name="port"></Get>
+	
+	<Call name="doAdd">
+		<Arg>locahhost</Arg>
+		<Arg>
+			<Ref id="p"></Ref>
+		</Arg>
+	</Call>
+
+	<Call id="hashmap" name="staticPrint" class="jetty.xml.SimpleXmlConfigure">
+		<Put name="first">yangwm</Put>
+	</Call>
+	
+	<Call name="printString" class="jetty.xml.SimpleXmlConfigure">
+		<Arg>
+			<Ref id="hashmap"></Ref>
+		</Arg>
+	</Call>
+</Configure>
